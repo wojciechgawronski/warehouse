@@ -4,6 +4,18 @@
 
 {% block body %}
 
-    <h2 class='display-6'>Dashboard site</h2>
+    <h2 class='display-6'>Dashboard</h2>
+
+    <div class="my-2">
+        {% if is_granted('ROLE_ADMIN') %}
+            {{ component('adminDashboardNavComponent') }}
+        {% elseif is_granted('ROLE_USER') %}
+            {{ component('userDashboardNavComponent') }}
+        {% endif %}
+    </div>
+
+    {% block dashboardBody %}{% endblock %}
+
+</div>
 
 {% endblock %}

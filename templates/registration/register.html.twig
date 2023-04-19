@@ -1,20 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboard/index.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
-{% block body %}
-    <h2>Register</h2>
+{% block dashboardBody %}
+    <div class="card">
+        <div class="card-body">
 
-    {{ form_start(registrationForm) }}
-        <div class="form-group">
-            {{ form_row(registrationForm.email, {'attr' : {'class': 'form-control'}}) }}
-        <div>
-        <div class="form-group mt-2">
-            {{ form_row(registrationForm.plainPassword, {'attr' : {'class': 'form-control'}}, {
-                label: 'Password',
-                }) 
-            }}
+            <h2>Register user</h2>
+
+            {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    {{ form_row(registrationForm.email, {'attr' : {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group mt-2">
+                    {{ form_row(registrationForm.plainPassword, {'attr' : {'class': 'form-control'}}, {
+                        label: 'Password',
+                        }) 
+                    }}
+                </div>
+                <button type="submit" class="btn btn-primary my-2">Register</button>
+            {{ form_end(registrationForm) }}
+            
         </div>
-        <button type="submit" class="btn btn-primary my-2">Register</button>
-    {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
