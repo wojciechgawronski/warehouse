@@ -11,3 +11,4 @@ php bin/console doctrine:fixtures:load
 
 **php bin/console debug:router**  
 
+php bin/console make:registration  
