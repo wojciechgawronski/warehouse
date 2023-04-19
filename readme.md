@@ -4,3 +4,10 @@ git update-index --assume-unchanged .env
 
 php bin/console make:user; 
 php bin/console make:auth;  
+
+composer require orm-fixtures --dev  
+php bin/console make:fixtures // UserFixtures  
+php bin/console doctrine:fixtures:load  
+
+**php bin/console debug:router**  
+
