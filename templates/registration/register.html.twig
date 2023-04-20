@@ -1,6 +1,6 @@
 {% extends 'dashboard/index.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ parent() }} - Register{% endblock %}
 
 {% block dashboardBody %}
     {% if is_granted('ROLE_ADMIN') %}
