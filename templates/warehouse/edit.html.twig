@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboard/index.html.twig' %}
 
-{% block title %}Edit Warehouse{% endblock %}
+{% block title %}Register{% endblock %}
 
-{% block body %}
+{% block dashboardBody %}
+
     <h1>Edit Warehouse</h1>
 
     {{ include('warehouse/_form.html.twig', {'button_label': 'Update'}) }}
@@ -10,4 +11,5 @@
     <a class="btn btn-primary" href="{{ path('app_warehouse_index') }}">back to list</a>
 
     {{ include('warehouse/_delete_form.html.twig') }}
+
 {% endblock %}
