@@ -1,17 +1,25 @@
+{% set requestRoute = app.request.get('_route') %}
+
 <nav class="navbar navbar-expand bg-light">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Register user</a>
-                </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Article
-                    </a>
+                    <a class="nav-link dropdown-toggle
+                        {% if requestRoute == 'app_register' %}active{% endif %}
+                    " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Create</a></li>
-                        <li><a class="dropdown-item" href="#">Send</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_register') }}">Register user</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle
+                    {% if requestRoute == 'app_warehouse_new' or requestRoute  == 'app_warehouse_index' %}active{% endif %}
+                " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Warehouse</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ path('app_warehouse_new') }}">Create new</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_warehouse_index') }}">List</a></li>
                     </ul>
                 </li>
             </ul>
