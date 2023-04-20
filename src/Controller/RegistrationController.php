@@ -38,6 +38,16 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $role = $form->get('Roles')->getData();
+            $allowedRoles = ['ROLE_USER'];
+
+            if (!$this->_isInArray($allowedRoles, $role)) {
+                // @TODO handle form validation:
+                dd('User role no allowed');
+            }
+
+            $user->setRoles($role); 
+
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -52,5 +62,24 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    private function _isInArray(array $haystack, string|array $nedlle): bool
+    {
+        if (is_string($nedlle)) {
+            if (in_array($nedlle, $haystack)) {
+                return true;
+            }
+            return false;
+        }
+    
+        if (is_array($nedlle)) {
+            foreach ($nedlle as $str) {
+                if (in_array($str, $haystack)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
