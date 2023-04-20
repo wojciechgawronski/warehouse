@@ -9,6 +9,10 @@ composer require orm-fixtures --dev
 php bin/console make:fixtures // UserFixtures  
 php bin/console doctrine:fixtures:load  
 
+doctrine:migrations:status
+doctrine:migrations:latest
+doctrine:migrations:migrate 
+
 **php bin/console debug:router**  
 
 php bin/console make:registration  
