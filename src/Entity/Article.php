@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,14 @@ class Article
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $unitMeasurment = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: ArticleInStock::class)]
+    private Collection $articleInStocks;
+
+    public function __construct()
+    {
+        $this->articleInStocks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +115,36 @@ class Article
     public function setUnitMeasurment(?string $unitMeasurment): self
     {
         $this->unitMeasurment = $unitMeasurment;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ArticleInStock>
+     */
+    public function getArticleInStocks(): Collection
+    {
+        return $this->articleInStocks;
+    }
+
+    public function addArticleInStock(ArticleInStock $articleInStock): self
+    {
+        if (!$this->articleInStocks->contains($articleInStock)) {
+            $this->articleInStocks->add($articleInStock);
+            $articleInStock->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticleInStock(ArticleInStock $articleInStock): self
+    {
+        if ($this->articleInStocks->removeElement($articleInStock)) {
+            // set the owning side to null (unless already changed)
+            if ($articleInStock->getArticle() === $this) {
+                $articleInStock->setArticle(null);
+            }
+        }
 
         return $this;
     }

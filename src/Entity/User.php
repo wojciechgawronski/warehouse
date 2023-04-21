@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -31,6 +33,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: ArticleInStock::class)]
+    private Collection $articleInStocks;
+
+    public function __construct()
+    {
+        $this->articleInStocks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -116,5 +126,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString() {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, ArticleInStock>
+     */
+    public function getArticleInStocks(): Collection
+    {
+        return $this->articleInStocks;
+    }
+
+    public function addArticleInStock(ArticleInStock $articleInStock): self
+    {
+        if (!$this->articleInStocks->contains($articleInStock)) {
+            $this->articleInStocks->add($articleInStock);
+            $articleInStock->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticleInStock(ArticleInStock $articleInStock): self
+    {
+        if ($this->articleInStocks->removeElement($articleInStock)) {
+            // set the owning side to null (unless already changed)
+            if ($articleInStock->getCreatedBy() === $this) {
+                $articleInStock->setCreatedBy(null);
+            }
+        }
+
+        return $this;
     }
 }
