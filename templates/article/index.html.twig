@@ -31,7 +31,9 @@
                 <td>{{ article.unitMeasurment }}</td>
                 <td>
                     <a class="btn btn-sm btn-info" href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a class="btn btn-sm btn-info" href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-sm btn-info" href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -42,6 +44,8 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="{{ path('app_article_new') }}">Create new</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-primary" href="{{ path('app_article_new') }}">Create new</a>
+    {% endif %}
     
 {% endblock %}
