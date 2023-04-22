@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ArticleInStockRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/dashboard/article'), IsGranted("ROLE_USER") ]
 class ArticleController extends AbstractController
@@ -42,10 +43,11 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    public function show(Article $article, ArticleInStockRepository $articleInStockRepository): Response
     {
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'article_in_stocks' => $articleInStockRepository->findAll(),
         ]);
     }
 
