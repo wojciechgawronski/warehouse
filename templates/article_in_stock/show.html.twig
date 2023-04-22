@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ArticleInStock{% endblock %}
+
+{% block body %}
+    <h1>ArticleInStock</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article_in_stock.id }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ article_in_stock.file }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ article_in_stock.createdAt ? article_in_stock.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ article_in_stock.amount }}</td>
+            </tr>
+            <tr>
+                <th>Remaining_amount</th>
+                <td>{{ article_in_stock.remainingAmount }}</td>
+            </tr>
+            <tr>
+                <th>Article_operation_type</th>
+                <td>{{ article_in_stock.articleOperationType }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_article_in_stock_index') }}">back to list</a>
+
+    <a class="btn btn-primary" href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id}) }}">edit</a>
+
+    {{ include('article_in_stock/_delete_form.html.twig') }}
+{% endblock %}

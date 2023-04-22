@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_row(form.amount, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.file, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.remaining_amount, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.article, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.article_operation_type, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.created_by, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.created_at, {'attr': {'class': 'form-control'}}) }}
+    </div>
+   
+    <button class="btn btn-primary my-2">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
