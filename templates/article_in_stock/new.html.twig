@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new ArticleInStock</h1>
 
-    {# {{ include('article_in_stock/_form.html.twig') }} #}
+    {{ include('article_in_stock/_form.html.twig') }}
 
-    <a href="{{ path('app_article_in_stock_index') }}">back to list</a>
+    <a href="{{ path('app_article_in_stock_index', {'articleId': articleId }) }}">back to list</a>
 {% endblock %}

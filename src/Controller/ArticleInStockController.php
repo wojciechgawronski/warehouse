@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\ArticleInStock;
 use App\Form\ArticleInStockType;
 use App\Repository\ArticleInStockRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/article/in/stock')]
+#[Route('/dashboard/article/{articleId}')]
 class ArticleInStockController extends AbstractController
 {
-    #[Route('/', name: 'app_article_in_stock_index', methods: ['GET'])]
+    #[Route('/article-in-stock/', name: 'app_article_in_stock_index', methods: ['GET'])]
     public function index(ArticleInStockRepository $articleInStockRepository): Response
     {
         return $this->render('article_in_stock/index.html.twig', [
@@ -21,9 +23,14 @@ class ArticleInStockController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_article_in_stock_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ArticleInStockRepository $articleInStockRepository): Response
+    #[Route('/article-in-stock/new', name: 'app_article_in_stock_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, ArticleRepository $articleRepository,  ArticleInStockRepository $articleInStockRepository): Response
     {
+        $article = new Article();
+        $request->query->get('article');
+        dd($request->query->get('article'));
+        dd($article);
+        $request->query->get('id');
         $articleInStock = new ArticleInStock();
         $form = $this->createForm(ArticleInStockType::class, $articleInStock);
         $form->handleRequest($request);
@@ -37,10 +44,11 @@ class ArticleInStockController extends AbstractController
         return $this->renderForm('article_in_stock/new.html.twig', [
             'article_in_stock' => $articleInStock,
             'form' => $form,
+            'articleId' => 1
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_in_stock_show', methods: ['GET'])]
+    #[Route('/article-in-stock/{id}', name: 'app_article_in_stock_show', methods: ['GET'])]
     public function show(ArticleInStock $articleInStock): Response
     {
         return $this->render('article_in_stock/show.html.twig', [
@@ -48,7 +56,7 @@ class ArticleInStockController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_article_in_stock_edit', methods: ['GET', 'POST'])]
+    #[Route('/article-in-stock/{id}/edit', name: 'app_article_in_stock_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ArticleInStock $articleInStock, ArticleInStockRepository $articleInStockRepository): Response
     {
         $form = $this->createForm(ArticleInStockType::class, $articleInStock);
@@ -66,7 +74,7 @@ class ArticleInStockController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_in_stock_delete', methods: ['POST'])]
+    #[Route('/article-in-stock/{id}', name: 'app_article_in_stock_delete', methods: ['POST'])]
     public function delete(Request $request, ArticleInStock $articleInStock, ArticleInStockRepository $articleInStockRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$articleInStock->getId(), $request->request->get('_token'))) {
