@@ -7,5 +7,5 @@
 
     {{ include('article_in_stock/_form.html.twig') }}
 
-    <a href="{{ path('app_article_in_stock_index', {'articleId': articleId }) }}">back to list</a>
+    <a href="{{ path('app_article_in_stock_index', {'article': article.id }) }}">back to list</a>
 {% endblock %}

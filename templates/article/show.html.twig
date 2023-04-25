@@ -40,7 +40,7 @@
     </table>
 
     <a class="btn btn-info" href="{{ path('app_article_index') }}">Back to list</a>
-    <a class="btn btn-success" href="{{ path('app_article_in_stock_new', {'articleId': 1}) }}">Add Article to ArticleInStock</a>
+    <a class="btn btn-success" href="{{ path('app_article_in_stock_new', {'article': 1}) }}">Add Article to ArticleInStock</a>
     
     {% if is_granted('ROLE_ADMIN') %}
     
@@ -79,8 +79,8 @@
                         <td>{{ article_in_stock.createdAt ? article_in_stock.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                         <td>{{ article_in_stock.createdBy }}</td>
                         <td>
-                            <a class="btn btn-sm btn-light" href="{{ path('app_article_in_stock_show', {'id': article_in_stock.id, 'articleId' : article.id}) }}">show</a>
-                            <a class="btn btn-sm btn-light" href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id, 'articleId' : article.id}) }}">edit</a>
+                            <a class="btn btn-sm btn-light" href="{{ path('app_article_in_stock_show', {'id': article_in_stock.id, 'article' : article.id}) }}">show</a>
+                            <a class="btn btn-sm btn-light" href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id, 'article' : article.id}) }}">edit</a>
                         </td>
                     </tr>
                 {% else %}

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/dashboard/article/{articleId}')]
+#[Route('/dashboard/article/{article}')]
 class ArticleInStockController extends AbstractController
 {
     #[Route('/article-in-stock/', name: 'app_article_in_stock_index', methods: ['GET'])]
@@ -44,7 +44,7 @@ class ArticleInStockController extends AbstractController
         return $this->renderForm('article_in_stock/new.html.twig', [
             'article_in_stock' => $articleInStock,
             'form' => $form,
-            'articleId' => 1
+            'article' => $article
         ]);
     }
 

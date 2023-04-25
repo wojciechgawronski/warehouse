@@ -27,8 +27,8 @@
                 <td>{{ article_in_stock.remainingAmount }}</td>
                 <td>{{ article_in_stock.articleOperationType }}</td>
                 <td>
-                    <a href="{{ path('app_article_in_stock_show', {'id': article_in_stock.id}) }}">show</a>
-                    <a href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id}) }}">edit</a>
+                    <a href="{{ path('app_article_in_stock_show', {'id': article_in_stock.id, 'article' : article.id }) }}">show</a>
+                    <a href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id, 'article' : article.id }) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_article_in_stock_new', {'articleId' : article.id}) }}">Create new</a>
+    <a href="{{ path('app_article_in_stock_new', {'article' : article.id}) }}">Create new</a>
 {% endblock %}
