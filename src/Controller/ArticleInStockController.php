@@ -54,7 +54,7 @@ class ArticleInStockController extends AbstractController
     }
 
     #[Route('/article-in-stock/{id}/edit', name: 'app_article_in_stock_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ArticleInStock $articleInStock, ArticleInStockRepository $articleInStockRepository): Response
+    public function edit(Request $request, Article $article, ArticleInStock $articleInStock, ArticleInStockRepository $articleInStockRepository): Response
     {
         $form = $this->createForm(ArticleInStockType::class, $articleInStock);
         $form->handleRequest($request);
@@ -68,6 +68,7 @@ class ArticleInStockController extends AbstractController
         return $this->renderForm('article_in_stock/edit.html.twig', [
             'article_in_stock' => $articleInStock,
             'form' => $form,
+            'article' => $article,
         ]);
     }
 
