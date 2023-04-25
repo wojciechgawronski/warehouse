@@ -4,40 +4,7 @@
 
 {% block dashboardBody %}
 
-    <h1><span class="text-muted">Article:</span> {{ article.name }}</h1>
-
-    <table class="table table-sm">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ article.name }}</td>
-            </tr>
-            <tr>
-                <th>AmountInStock</th>
-                <td>{{ article.amountInStock }}</td>
-            </tr>
-            <tr>
-                <th>Vat</th>
-                <td>{{ article.vat }}</td>
-            </tr>
-            <tr>
-                <th>UnitPrice</th>
-                <td>{{ article.unitPrice }}</td>
-            </tr>
-            <tr>
-                <th>File</th>
-                <td>{{ article.file }}</td>
-            </tr>
-            <tr>
-                <th>UnitMeasurment</th>
-                <td>{{ article.unitMeasurment }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {{ component('showArticle', {article: article }) }}
 
     <a class="btn btn-info" href="{{ path('app_article_index') }}">Back to list</a>
     <a class="btn btn-success" href="{{ path('app_article_in_stock_new', {'article': 1}) }}">Add Article to ArticleInStock</a>
