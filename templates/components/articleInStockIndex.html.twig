@@ -27,8 +27,8 @@
 						<td>{{ article_in_stock.createdAt ? article_in_stock.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ article_in_stock.createdBy }}</td>
 						<td>
-							<a class="btn btn-sm btn-light" href="{{ path('app_article_in_stock_show', {'id': article_in_stock.id, 'article' : article.id}) }}">show</a>
-							<a class="btn btn-sm btn-light" href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id, 'article' : article.id}) }}">edit</a>
+							<a class="btn btn-sm btn-info" href="{{ path('app_article_in_stock_show', {'id': article_in_stock.id, 'article' : article.id}) }}">show</a>
+							<a class="btn btn-sm btn-warning" href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id, 'article' : article.id}) }}">edit</a>
 						</td>
 					</tr>
 				{% else %}
