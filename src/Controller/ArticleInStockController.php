@@ -16,21 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleInStockController extends AbstractController
 {
     #[Route('/article-in-stock/', name: 'app_article_in_stock_index', methods: ['GET'])]
-    public function index(ArticleInStockRepository $articleInStockRepository): Response
+    public function index(Article $article, ArticleInStockRepository $articleInStockRepository): Response
     {
         return $this->render('article_in_stock/index.html.twig', [
             'article_in_stocks' => $articleInStockRepository->findAll(),
+            'article' => $article,
         ]);
     }
 
     #[Route('/article-in-stock/new', name: 'app_article_in_stock_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ArticleRepository $articleRepository,  ArticleInStockRepository $articleInStockRepository): Response
+    public function new(Request $request, Article $article,  ArticleInStockRepository $articleInStockRepository): Response
     {
-        $article = new Article();
-        $request->query->get('article');
-        dd($request->query->get('article'));
-        dd($article);
-        $request->query->get('id');
         $articleInStock = new ArticleInStock();
         $form = $this->createForm(ArticleInStockType::class, $articleInStock);
         $form->handleRequest($request);
@@ -49,10 +45,11 @@ class ArticleInStockController extends AbstractController
     }
 
     #[Route('/article-in-stock/{id}', name: 'app_article_in_stock_show', methods: ['GET'])]
-    public function show(ArticleInStock $articleInStock): Response
+    public function show(Article $article, ArticleInStock $articleInStock): Response
     {
         return $this->render('article_in_stock/show.html.twig', [
             'article_in_stock' => $articleInStock,
+            'article' => $article
         ]);
     }
 

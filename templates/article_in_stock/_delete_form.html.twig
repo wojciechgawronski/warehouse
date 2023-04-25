@@ -1,4 +1,4 @@
-<form class="d-inline-block" method="post" action="{{ path('app_article_in_stock_delete', {'id': article_in_stock.id, 'articleId' : 1}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<form class="d-inline-block" method="post" action="{{ path('app_article_in_stock_delete', {'id': article_in_stock.id, 'article' : 1}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article_in_stock.id) }}">
     <button class="btn btn-danger">Delete</button>
 </form>
