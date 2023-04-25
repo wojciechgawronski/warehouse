@@ -47,7 +47,7 @@ class ArticleController extends AbstractController
     {
         return $this->render('article/show.html.twig', [
             'article' => $article,
-            'article_in_stocks' => $articleInStockRepository->findAll(),
+            'article_in_stocks' => $articleInStockRepository->findBy(['article' => $article]),
         ]);
     }
 
