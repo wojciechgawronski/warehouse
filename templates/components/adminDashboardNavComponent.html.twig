@@ -23,7 +23,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
-                    {% if requestRoute == 'app_article_new' or requestRoute  == 'app_article_index' %}active{% endif %}"
+                    {% if requestRoute == 'app_article_new' or requestRoute  == 'app_article_index' or requestRoute == 'app_article_show' %}active{% endif %}"
                     href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Article</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ path('app_article_new') }}">Create new</a></li>

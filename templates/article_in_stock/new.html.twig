@@ -1,11 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'article/show.html.twig' %}
 
 {% block title %}New ArticleInStock{% endblock %}
 
-{% block body %}
-    <h1>Create new ArticleInStock</h1>
-
-    {{ include('article_in_stock/_form.html.twig') }}
+{% block dashboardBody %}
+    
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Create new ArticleInStock</h5>
+        </div>
+        <div class="card-body">
+            {{ include('article_in_stock/_form.html.twig') }}
+        </div>
+    </div>
 
     <a href="{{ path('app_article_in_stock_index', {'article': article.id }) }}">back to list</a>
+
 {% endblock %}
