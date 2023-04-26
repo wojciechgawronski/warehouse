@@ -1,22 +1,68 @@
+{% block stylesheets %}
+<style>
+.form-group ul{
+    list-style-type: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+.form-group li {
+    display: block; 
+    padding: 7px 12px;
+    border: 1px solid gray;
+    margin-bottom: 10px; 
+}
+</style>
+{% endblock %}
+
 {{ form_start(form) }}
     <div class="form-group">
-        {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.name) is empty %}
+            {{ form_row(form.name, {'attr': {'class': "form-control"}}) }}
+        {% else %}
+            {{ form_row(form.name, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
     </div>
+    
     <div class="form-group mt-2">
-        {{ form_row(form.vat, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.vat) is empty %}
+            {{ form_row(form.vat, {'attr': {'class': 'form-control'}}) }}
+        {% else %}
+            {{ form_row(form.vat, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
     </div>
-        <div class="form-group mt-2">
-        {{ form_row(form.file, {'attr': {'class': 'form-control'}}) }}
-    </div>
-        <div class="form-group mt-2">
-        {{ form_row(form.unitPrice, {'attr': {'class': 'form-control'}}) }}
-    </div>
+    
     <div class="form-group mt-2">
-        {{ form_row(form.amountInStock, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.file) is empty %}
+            {{ form_row(form.file, {'attr': {'class': 'form-control'}}) }}
+        {% else %}
+            {{ form_row(form.file, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
     </div>
+
     <div class="form-group mt-2">
-        {{ form_row(form.unitMeasurment, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.unitPrice) is empty %}
+            {{ form_row(form.unitPrice, {'attr': {'class': 'form-control'}}) }}
+        {% else %}
+            {{ form_row(form.unitPrice, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
+    </div>
+
+    <div class="form-group mt-2">
+        {% if form_errors(form.amountInStock) is empty %}
+            {{ form_row(form.amountInStock, {'attr': {'class': 'form-control'}}) }}
+        {% else %}
+            {{ form_row(form.amountInStock, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
+    </div>
+
+    <div class="form-group mt-2">
+        {% if form_errors(form.unitMeasurment) is empty %}
+            {{ form_row(form.unitMeasurment, {'attr': {'class': 'form-control'}}) }}
+        {% else %}
+            {{ form_row(form.unitMeasurment, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
     </div>
 
     <button class="btn btn-primary my-2">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}
