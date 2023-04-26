@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,6 +26,12 @@ class ArticleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'constraints' => [
+                new UniqueEntity([
+                    'entityClass' => Article::class,
+                    'fields' => 'name',
+                ])
+            ],
             'data_class' => Article::class,
         ]);
     }
