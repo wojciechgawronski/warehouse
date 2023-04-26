@@ -27,7 +27,7 @@
                 <td>{{ article.amountInStock }}</td>
                 <td>{{ article.vat }}</td>
                 <td>{{ article.unitPrice }}</td>
-                <td>{{ article.file }}</td>
+                <td><a href="{{ url('app_home') }}{{ article.file }}">{{ article.file }}</a></td>
                 <td>{{ article.unitMeasurment }}</td>
                 <td>
                     <a class="btn btn-sm btn-info" href="{{ path('app_article_show', {'id': article.id}) }}">show</a>

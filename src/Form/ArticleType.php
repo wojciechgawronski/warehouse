@@ -4,10 +4,11 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ArticleType extends AbstractType
 {
@@ -15,10 +16,19 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('amountInStock')
             ->add('vat')
+            ->add('file', FileType::class, [
+                'label' => 'File | Only .pdf, max-size: 2M',
+                'required'   => false,
+                'constraints' => [  
+                    new File([
+                        'maxSize' => '2M', 
+                        'mimeTypes' => ['application/pdf']
+                    ]),
+                ]
+            ])
             ->add('unitPrice')
-            ->add('file')
+            ->add('amountInStock')
             ->add('unitMeasurment')
         ;
     }

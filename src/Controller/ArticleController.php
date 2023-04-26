@@ -31,6 +31,16 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $pdfFile = $form->get('file')->getData();
+
+            if ($pdfFile) {
+                $newFileName = uniqid().'.'.$pdfFile->getClientOriginalExtension();
+                $destination = 'uploads/article';
+                $pdfFile->move($destination, $newFileName);
+                $article->setFile( $destination.'/'.$newFileName); 
+            }
+            
             $articleRepository->save($article, true);
 
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
