@@ -19,7 +19,7 @@ class ArticleInStockController extends AbstractController
     public function index(Article $article, ArticleInStockRepository $articleInStockRepository): Response
     {
         return $this->render('article_in_stock/index.html.twig', [
-            'article_in_stocks' => $articleInStockRepository->findAll(),
+            'article_in_stocks' => $articleInStockRepository->findBy(['article' => $article]),
             'article' => $article,
         ]);
     }
