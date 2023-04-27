@@ -6,7 +6,7 @@ use App\Entity\Article;
 use App\Entity\ArticleInStock;
 use App\Form\ArticleInStockType;
 use App\Repository\ArticleInStockRepository;
-use App\Repository\ArticleRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,9 +32,13 @@ class ArticleInStockController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $articleInStock->setCreatedAt(new DateTimeImmutable('now'));
+            $articleInStock->setCreatedBy($this->getUser());
+            $articleInStock->setArticle($article);
+
             $articleInStockRepository->save($articleInStock, true);
 
-            return $this->redirectToRoute('app_article_in_stock_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_article_show', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('article_in_stock/new.html.twig', [

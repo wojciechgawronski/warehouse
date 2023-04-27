@@ -7,7 +7,7 @@
     {{ component('showArticle', {article: article }) }}
 
     <a class="btn btn-info" href="{{ path('app_article_index') }}">Back to list</a>
-    <a class="btn btn-success" href="{{ path('app_article_in_stock_new', {'article': 1}) }}">Add Article to ArticleInStock</a>
+    <a class="btn btn-success" href="{{ path('app_article_in_stock_new', {'article': article.id}) }}">Add Article to ArticleInStock</a>
     
     {% if is_granted('ROLE_ADMIN') %}
     

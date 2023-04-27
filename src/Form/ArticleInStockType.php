@@ -13,12 +13,9 @@ class ArticleInStockType extends AbstractType
     {
         $builder
             ->add('file')
-            ->add('created_at')
             ->add('amount')
             ->add('remaining_amount')
             ->add('article_operation_type')
-            ->add('article')
-            ->add('created_by')
         ;
     }
 
