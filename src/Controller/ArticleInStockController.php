@@ -73,12 +73,12 @@ class ArticleInStockController extends AbstractController
     }
 
     #[Route('/article-in-stock/{id}', name: 'app_article_in_stock_delete', methods: ['POST'])]
-    public function delete(Request $request, ArticleInStock $articleInStock, ArticleInStockRepository $articleInStockRepository): Response
+    public function delete(Request $request, Article $article, ArticleInStock $articleInStock, ArticleInStockRepository $articleInStockRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$articleInStock->getId(), $request->request->get('_token'))) {
             $articleInStockRepository->remove($articleInStock, true);
         }
 
-        return $this->redirectToRoute('app_article_in_stock_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_article_show', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);
     }
 }
