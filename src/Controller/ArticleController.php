@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\ArticleInStockRepository;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,10 +81,21 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_article_delete', methods: ['POST']), IsGranted("ROLE_ADMIN")]
-    public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    public function delete(Request $request, Article $article, ArticleRepository $articleRepository, ArticleInStockRepository $articleInStockRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+            $articlesInStock = $articleInStockRepository->findBy(['article' => $article]);
+            foreach ($articlesInStock as $articleInStock) {
+                $articleInStockRepository->remove($articleInStock);
+            }
+
+            if (file_exists($article->getFile())) {
+                $fileSystem = new Filesystem();
+                $fileSystem->remove($article->getFile());
+            }
+
             $articleRepository->remove($article, true);
+            $this->addFlash('success', 'Article Deleted.');
         }
 
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
