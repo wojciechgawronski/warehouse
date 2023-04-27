@@ -28,7 +28,6 @@ class ArticleType extends AbstractType
                 ]
             ])
             ->add('unitPrice')
-            ->add('amountInStock')
             ->add('unitMeasurment')
         ;
     }

@@ -19,8 +19,8 @@ class Article
     #[ORM\Column(length: 255, unique: true)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::BIGINT, nullable: true)]
-    private ?string $amountInStock = null;
+    #[ORM\Column(type: Types::BIGINT)]
+    private ?int $amountInStock = 0;
 
     #[ORM\Column(nullable: true)]
     private ?int $vat = null;

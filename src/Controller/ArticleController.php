@@ -44,6 +44,8 @@ class ArticleController extends AbstractController
             
             $articleRepository->save($article, true);
 
+            $this->addFlash('success', 'Article Added.');
+
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
 
