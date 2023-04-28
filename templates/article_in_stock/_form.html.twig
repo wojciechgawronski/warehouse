@@ -1,15 +1,26 @@
+{{ component('formCssStyle') }}
+
 {{ form_start(form) }}
     <div class="form-group">
-        {{ form_row(form.amount, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.amount) is empty %}
+            {{ form_row(form.amount, {'attr': {'class': 'form-control'}}) }}
+        {% else %}
+            {{ form_row(form.amount, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
     </div>
     <div class="form-group">
-        {{ form_row(form.file, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.file) is empty %}
+            {{ form_row(form.file, {'attr': {'class': 'form-control'}}) }}
+        {% else %}
+            {{ form_row(form.file, {'attr': {'class': "form-control is-invalid"}}) }}
+        {% endif %}
     </div>
     <div class="form-group">
-        {{ form_row(form.remaining_amount, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(form.article_operation_type, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.article_operation_type) is empty %}
+            {{ form_row(form.article_operation_type, {'attr': {'class': 'form-select'}}) }}
+        {% else %}
+            {{ form_row(form.article_operation_type, {'attr': {'class': "form-select is-invalid"}}) }}
+        {% endif %}
     </div>
    
     <button class="btn btn-primary my-2">{{ button_label|default('Save') }}</button>

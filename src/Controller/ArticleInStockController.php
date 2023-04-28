@@ -7,6 +7,7 @@ use App\Entity\ArticleInStock;
 use App\Form\ArticleInStockType;
 use App\Repository\ArticleInStockRepository;
 use DateTimeImmutable;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,14 @@ class ArticleInStockController extends AbstractController
             $articleInStock->setCreatedAt(new DateTimeImmutable('now'));
             $articleInStock->setCreatedBy($this->getUser());
             $articleInStock->setArticle($article);
+
+            $articleInStock->setRemainingAmount(333);
+
+            $pdfFile = $form->get('file')->getData();
+            $newFileName = uniqid().'.'.$pdfFile->getClientOriginalExtension();
+            $destination = 'uploads/articleInStock';
+            $pdfFile->move($destination, $newFileName);
+            $articleInStock->setFile( $destination.'/'.$newFileName); 
 
             $articleInStockRepository->save($articleInStock, true);
 
@@ -82,6 +91,13 @@ class ArticleInStockController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$articleInStock->getId(), $request->request->get('_token'))) {
             $articleInStockRepository->remove($articleInStock, true);
         }
+
+        if (file_exists($article->getFile())) {
+            $fileSystem = new Filesystem();
+            $fileSystem->remove($article->getFile());
+        }
+
+        $this->addFlash('success', 'Article In Stock Deleted.');
 
         return $this->redirectToRoute('app_article_show', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);
     }
