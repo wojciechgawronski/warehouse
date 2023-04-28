@@ -37,8 +37,20 @@ class ArticleInStockController extends AbstractController
             $articleInStock->setCreatedBy($this->getUser());
             $articleInStock->setArticle($article);
 
-            $articleInStock->setRemainingAmount(333);
+            $actualAmountInStock = $article->getAmountInStock();
+            if ($articleInStock->getOperationType() == 'add') {
+                $actualAmountInStock = $actualAmountInStock + $articleInStock->getAmount();
+            } else if ($articleInStock->getOperationType() == 'remove') {
+                $actualAmountInStock = $actualAmountInStock - $articleInStock->getAmount();
+                if ($actualAmountInStock < 0) {
+                    $this->addFlash('warning', 'Amount in stock can not be under 0.');
+                    return $this->redirectToRoute('app_article_in_stock_new', ['article' => $article->getId()], Response::HTTP_SEE_OTHER);
+                }
+            }
 
+            $article->setAmountInStock($actualAmountInStock);
+            $articleInStock->setRemainingAmount($actualAmountInStock);
+            
             $pdfFile = $form->get('file')->getData();
             $newFileName = uniqid().'.'.$pdfFile->getClientOriginalExtension();
             $destination = 'uploads/articleInStock';
