@@ -3,41 +3,9 @@
 {% block title %}ArticleInStock index{% endblock %}
 
 {% block body %}
-    <h1>ArticleInStock index</h1>
 
-    <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>File</th>
-                <th>Created_at</th>
-                <th>Amount</th>
-                <th>Remaining_amount</th>
-                <th>Article_operation_type</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article_in_stock in article_in_stocks %}
-            <tr>
-                <td>{{ article_in_stock.id }}</td>
-                <td>{{ article_in_stock.file }}</td>
-                <td>{{ article_in_stock.createdAt ? article_in_stock.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article_in_stock.amount }}</td>
-                <td>{{ article_in_stock.remainingAmount }}</td>
-                <td>{{ article_in_stock.articleOperationType }}</td>
-                <td>
-                    <a href="{{ path('app_article_in_stock_show', {'id': article_in_stock.id, 'article' : article.id }) }}">show</a>
-                    <a href="{{ path('app_article_in_stock_edit', {'id': article_in_stock.id, 'article' : article.id }) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {{ component('articleInStockIndex', { article_in_stocks: article_in_stocks, article: article }) }}
 
     <a href="{{ path('app_article_in_stock_new', {'article' : article.id}) }}">Create new</a>
+
 {% endblock %}

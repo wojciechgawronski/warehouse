@@ -22,7 +22,7 @@
 						<td>{{ article_in_stock.id }}</td>
 						<td>{{ article_in_stock.amount }}</td>
 						<td>{{ article_in_stock.remainingAmount }}</td>
-						<td>{{ article_in_stock.file }}</td>
+						<td><a href="{{ path('app_home') }}{{ article_in_stock.file }}">{{ article_in_stock.file }}</a></td>
 						<td>{{ article_in_stock.articleOperationType }}</td>
 						<td>{{ article_in_stock.createdAt ? article_in_stock.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ article_in_stock.createdBy }}</td>
