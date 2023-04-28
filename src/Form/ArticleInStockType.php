@@ -6,11 +6,11 @@ use App\Entity\ArticleInStock;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ArticleInStockType extends AbstractType
 {
@@ -27,15 +27,19 @@ class ArticleInStockType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('amount', TextType::class, [
+            ->add('amount', IntegerType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ]
             ])
-            ->add('article_operation_type', ChoiceType::class, [
+            ->add('operation_type', ChoiceType::class, [
+                'label' => 'Operation type',
+                'constraints' => [
+                    new NotBlank()
+                ],
                 'choices' => [
-                    'add' => true,
-                    'remove' => false
+                    'add' => 'add',
+                    'remove' => 'remove',
                 ]
             ])
         ;

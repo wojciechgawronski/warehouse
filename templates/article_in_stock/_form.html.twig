@@ -9,17 +9,17 @@
         {% endif %}
     </div>
     <div class="form-group">
+        {% if form_errors(form.operation_type) is empty %}
+            {{ form_row(form.operation_type, {'attr': {'class': 'form-select'}}) }}
+        {% else %}
+            {{ form_row(form.operation_type, {'attr': {'class': "form-select is-invalid"}}) }}
+        {% endif %}
+    </div>
+    <div class="form-group">
         {% if form_errors(form.file) is empty %}
             {{ form_row(form.file, {'attr': {'class': 'form-control'}}) }}
         {% else %}
             {{ form_row(form.file, {'attr': {'class': "form-control is-invalid"}}) }}
-        {% endif %}
-    </div>
-    <div class="form-group">
-        {% if form_errors(form.article_operation_type) is empty %}
-            {{ form_row(form.article_operation_type, {'attr': {'class': 'form-select'}}) }}
-        {% else %}
-            {{ form_row(form.article_operation_type, {'attr': {'class': "form-select is-invalid"}}) }}
         {% endif %}
     </div>
    

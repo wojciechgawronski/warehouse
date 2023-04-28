@@ -30,7 +30,7 @@ class ArticleInStock
     private ?string $remaining_amount = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $article_operation_type = null;
+    private ?string $operation_type = null;
 
     #[ORM\ManyToOne(inversedBy: 'articleInStocks')]
     #[ORM\JoinColumn(nullable: false)]
@@ -101,14 +101,14 @@ class ArticleInStock
         return $this;
     }
 
-    public function getArticleOperationType(): ?string
+    public function getOperationType(): ?string
     {
-        return $this->article_operation_type;
+        return $this->operation_type;
     }
 
-    public function setArticleOperationType(string $article_operation_type): self
+    public function setOperationType(string $operation_type): self
     {
-        $this->article_operation_type = $article_operation_type;
+        $this->operation_type = $operation_type;
 
         return $this;
     }
