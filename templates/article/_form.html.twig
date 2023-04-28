@@ -1,18 +1,4 @@
-{% block stylesheets %}
-<style>
-.form-group ul{
-    list-style-type: none;
-    margin-bottom: 0;
-    padding: 0;
-}
-.form-group li {
-    display: block; 
-    margin-bottom: 2px; 
-    font-size: small;
-    color: red;
-}
-</style>
-{% endblock %}
+{{ component('formCssStyle') }}
 
 {{ form_start(form) }}
     <div class="form-group">
