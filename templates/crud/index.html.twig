@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crud index{% endblock %}
+
+{% block body %}
+    <h1>Crud index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for crud in cruds %}
+            <tr>
+                <td>{{ crud.id }}</td>
+                <td>
+                    <a href="{{ path('app_crud_show', {'id': crud.id}) }}">show</a>
+                    <a href="{{ path('app_crud_edit', {'id': crud.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_crud_new') }}">Create new</a>
+{% endblock %}
