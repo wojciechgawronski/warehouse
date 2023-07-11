@@ -1,4 +1,4 @@
-### First symfony project after long time: Simple Warehouse.  
+##### First symfony project after long time: Simple Warehouse.  
 
 -----
 
